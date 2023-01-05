@@ -40,14 +40,7 @@ class Tutorial {
                 backgroundColor: Colors.transparent,
                 body: Stack(
                   children: [
-                    InkWell(
-                      onTap: () {
-                        if (element.onTap != null) {
-                          entrys[count].remove();
-                          element.onTap!();
-                        }
-                      },
-                      child: CustomPaint(
+                    CustomPaint(
                         size: size,
                         painter: HolePainter(
                             shapeFocus: element.shapeFocus,
@@ -55,22 +48,28 @@ class Tutorial {
                             dy: offset.dy + (sizeWidget.height / 2),
                             width: w,
                             height: h,
-                            radius: element.radius ?? 0),
-                      ),
-                    ),
-                    Positioned(
-                      top: element.top,
-                      bottom: element.bottom,
-                      left: element.left,
-                      right: element.right,
-                      child: Container(
-                        width: size.width * 0.8,
-                        child: Column(
-                          crossAxisAlignment: element.crossAxisAlignment,
-                          mainAxisAlignment: element.mainAxisAlignment,
-                          children: [
-                            ...element.children!,
-                          ],
+                            radius: element.radius ?? 0)),
+                    InkWell(
+                      onTap: () {
+                        if (element.onTap != null) {
+                          entrys[count].remove();
+                          element.onTap!();
+                        }
+                      },
+                      child: Positioned(
+                        top: element.top,
+                        bottom: element.bottom,
+                        left: element.left,
+                        right: element.right,
+                        child: Container(
+                          width: size.width * 0.8,
+                          child: Column(
+                            crossAxisAlignment: element.crossAxisAlignment,
+                            mainAxisAlignment: element.mainAxisAlignment,
+                            children: [
+                              ...element.children!,
+                            ],
+                          ),
                         ),
                       ),
                     ),
