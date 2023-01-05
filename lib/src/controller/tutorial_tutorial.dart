@@ -40,49 +40,45 @@ class Tutorial {
                 backgroundColor: Colors.transparent,
                 body: Stack(
                   children: [
-                    InkWell(
-                      onTap: () {
-                        if (element.onTap != null) {
-                          entrys[count].remove();
-                          element.onTap!();
-                        }
-                      },
-                      child: CustomPaint(
-                          size: size,
-                          painter: HolePainter(
-                              shapeFocus: element.shapeFocus,
-                              dx: offset.dx + (sizeWidget.width / 2),
-                              dy: offset.dy + (sizeWidget.height / 2),
-                              width: w,
-                              height: h,
-                              radius: element.radius ?? 0)),
-                    ),
+                    CustomPaint(
+                        size: size,
+                        painter: HolePainter(
+                            shapeFocus: element.shapeFocus,
+                            dx: offset.dx + (sizeWidget.width / 2),
+                            dy: offset.dy + (sizeWidget.height / 2),
+                            width: w,
+                            height: h,
+                            radius: element.radius ?? 0)),
                     Positioned(
-                      top: element.top,
-                      bottom: element.bottom,
-                      left: element.left,
-                      right: element.right,
-                      child: Container(
-                        width: size.width * 0.8,
-                        child: Column(
-                          crossAxisAlignment: element.crossAxisAlignment,
-                          mainAxisAlignment: element.mainAxisAlignment,
-                          children: [
-                            ...element.children!,
-                          ],
-                        ),
-                      ),
-                    ),
-                    if (element.widgetNext != null)
-                      GestureDetector(
-                        onTap: () => onNext(),
-                        child: element.widgetNext,
-                      ),
-                    if (element.widgetSkip != null)
-                      GestureDetector(
-                        onTap: () => dismiss(),
-                        child: element.widgetSkip,
-                      )
+                        top: element.top,
+                        bottom: element.bottom,
+                        left: element.left,
+                        right: element.right,
+                        child: Container(
+                            width: size.width * 0.8,
+                            child: Column(
+                                crossAxisAlignment: element.crossAxisAlignment,
+                                mainAxisAlignment: element.mainAxisAlignment,
+                                children: [...element.children!]))),
+                    if (element.widgetNext != null) GestureDetector(onTap: () => onNext(), child: element.widgetNext),
+                    if (element.widgetSkip != null) GestureDetector(onTap: () => dismiss(), child: element.widgetSkip),
+                    if (element.onTap != null)
+                      Positioned(
+                          top: offset.dy,
+                          left: offset.dx,
+                          child: InkWell(
+                              onTap: () {
+                                if (element.onTap != null) {
+                                  entrys[count].remove();
+                                  element.onTap!();
+                                }
+                              },
+                              child: Container(
+                                  width: sizeWidget.width,
+                                  height: sizeWidget.height,
+                                  decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(element.radius ?? 0)))))
                   ],
                 ),
               ),
