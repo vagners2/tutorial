@@ -1,6 +1,6 @@
 name: tutorial
 description: Tutorial package.
-version: 1.0.8
+version: 1.0.9
 homepage: https://github.com/warlesoncandido
 
 environment:
